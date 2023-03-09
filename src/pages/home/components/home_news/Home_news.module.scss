@@ -1,0 +1,85 @@
+.home_news {
+    margin-top: 120px;
+    .home_news_title {
+        float: right;
+    }
+    .clear {
+        clear: both;
+    }
+    .home_news_content {
+        margin: 85px 0px 190px;
+        .home_news_more_button {
+            margin-top: 70px;
+            display: flex;
+            justify-content: center;
+        }
+        .home_news_prev {
+            // background-color: #000;
+            position: absolute;
+            bottom: -115px;
+            left: 25%;
+            font-size: 30px;
+        }
+        .home_news_next {
+            // background-color: #000;
+            position: absolute;
+            bottom: -115px;
+            right: 25%;
+            font-size: 30px;
+        }
+        .home_news_item {
+                margin-right: 10px;
+            .home_news_img {
+                position: relative;
+                img {
+                    width: 100%;
+                    object-fit: cover;
+                    border-radius: 3px;
+                }
+                .home_news_circle {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background-color: rgba(0, 0, 0, 0.5);
+                    width: 70%;
+                    height: 70%;
+                    border: 3px solid rgba(255, 255, 255, 0.5);
+                    border-radius: 50%;
+                    opacity: 0;
+                    transition: 0.5s all;
+                    .home_news_circle_text {
+                        color: #fff;
+                        font-size: 25px;
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                    }
+                }
+            }
+            :hover .home_news_circle {
+                opacity: 1;
+                transition: 1s all;
+            }
+            // introduce
+            .home_news_introduce {
+                padding: 15px;
+                .home_news_time {
+                    color: #746458;
+                }
+                .home_news_introduce_title {
+                    color: #746458;
+                    margin-top: 10px;
+                    font-weight: 600;
+                    font-size: 16px;
+                }
+                .home_news_text {
+                    color: #746458;
+                    color: #746458;
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+}

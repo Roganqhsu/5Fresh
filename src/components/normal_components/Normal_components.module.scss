@@ -1,0 +1,29 @@
+.title{
+    border-bottom: 1px #77685C solid;
+    display: inline-block;
+    .en{
+        margin-right: 14px;
+        font-size: 22px;
+        font-weight: 600;
+        color:#C4AE93
+    }
+    .ch{
+        font-size: 22px;
+        font-weight: 600;
+        color:#746458
+    }
+}
+.Button{
+    button{
+        margin: 0 auto;
+        border: none;
+        border-radius: 10px;
+        width: 115px;
+        height: 45px ;
+        background-color: #C7B299;
+        color:#fff;
+        font-weight: 600;
+    }:hover{
+        background-color: #FBB03B;
+    }
+}

@@ -1,0 +1,75 @@
+.home_product {
+    margin-top: 120px;
+    
+    .home_product_title {
+        float: right;
+    }
+    .home_product_content_center {
+
+        .home_product_content {
+            align-items: center;
+            margin: 75px auto 15px;
+            display: flex;
+            justify-content: start;
+            flex-direction: row;
+            flex-wrap: wrap;
+            .home_product_item {
+                margin-right: 10px;
+                margin-bottom: 10px;
+                .home_product_img {
+                    position: relative;
+                    img {
+                        width: 200px;
+                        border-radius: 5px;
+                    }
+                    .home_product_circle {
+                        z-index: 10;
+                        width: 150px;
+                        height: 150px;
+                        border: 2px solid rgba(255, 255, 255, 0.5);
+                        border-radius: 50%;
+                        background-color: rgba(0, 0, 0, 0.5);
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        flex-direction: column;
+                        opacity: 0;
+                        transition: all 0.5s;
+                        .home_product_icon {
+                            font-size: 50px;
+                            color: #fff;
+                        }
+                        .home_product_circle_text {
+                            font-size: 16px;
+                            font-weight: 600;
+                            color: #fff;
+                        }
+                    }
+                }
+                :hover .home_product_circle {
+                    opacity: 1;
+                }
+                // text
+                .home_product_left {
+                    float: left;
+                    color: #1f1816;
+                    font-size: 14px;
+                    font-weight: 600;
+                }
+                .home_product_right {
+                    font-size: 14px;
+                    font-weight: 600;
+                    float: right;
+                    color: #1f1816;
+                }
+            }
+        }
+    }
+}
+.clear {
+    clear: both;
+}
