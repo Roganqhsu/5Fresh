@@ -1,12 +1,13 @@
 header {
+    transition: 0.5s all;
     z-index: 1;
     a {
         color: #000;
         text-decoration: none;
     }
     width: 100%;
-    position: fixed;
-    background-color: rgba(46, 204, 135, 0.6);
+    // position: fixed;
+    background-color: rgba(50, 220, 130, 0.6);
     // scroll
     
     height: 150px;
@@ -18,7 +19,7 @@ header {
         // scroll
         
         .header_RWD {
-            margin: 10px 0px;
+            padding: 10px 0px;
             .header_logo {
                 display: flex;
                 align-items: center;
@@ -42,8 +43,12 @@ header {
             display: flex;
             justify-content: space-between;
             .header_list {
+                // border: #000 1px solid;
                 display: flex;
                 .header_item {
+                    .header_item_none{
+                        display: none;
+                    }
                     position: relative;
                     .isActive {
                         .active {
@@ -77,6 +82,7 @@ header {
                 display: flex;
                 align-items: center;
                 .header_member_item {
+                    cursor: pointer;
                     margin: 5px;
                     display: flex;
                     align-items: center;
@@ -85,6 +91,26 @@ header {
                             color: #fff;
                             font-size: 16px;
                         }
+                    }:hover{
+                        color: #736357;
+                    }
+                }
+                .header_cart {
+                    margin: 5px;
+                    display: flex;
+                    align-items: center;
+                    a {
+                        position: relative;
+                        span {
+                            color: #fff;
+                            font-size: 16px;
+                        }:hover{
+                            color: #736357;
+                        }
+                        .header_cart_cartTotalQuantity{
+                            position: absolute;
+                            top: -8px;
+                        }
                     }
                 }
             }
@@ -92,6 +118,7 @@ header {
     }
 }
 .scroll_header{
+    position: fixed;
     height: 83px;
     transition: 0.5s all;
 }
@@ -108,6 +135,7 @@ header {
 
 @media screen and(max-width:768px) {
     header {
+
         height: 83px;
         .header_main {
             .header_RWD {
@@ -125,6 +153,25 @@ header {
                 .header_RWD_item {
                     display: flex;
                     align-items: center;
+                    .header_RWD_item_icon{
+                        color: #fff;
+                        cursor: pointer;
+                        a{
+                            color: #fff;
+                            .header_RWD_cart{
+                                position: relative;
+                                .header_RWD_cart_number{
+                                    position: absolute;
+                                    font-size: 16px;
+                                    font-weight: 600;
+                                    top: -6px;
+                                    right: -9px;
+                                }
+                            }
+                        }
+                    }:hover{
+                        color: #736357;
+                    }
                 }
             }
             hr {
@@ -132,6 +179,11 @@ header {
                 display: none;
             }
             .header_show_content {
+                .header_item_none{
+                    // border: #000 1px solid;
+                    display: block;
+
+                }
             }
             .header_content {
                 transform: translateX(-400%);
@@ -153,7 +205,12 @@ header {
                 .header_list {
                     display: flex;
                     flex-direction: column;
+                    
                     .header_item {
+                        // border: #000 1px solid;
+                        .header_item_none{
+                            display: block;
+                        }
                         position: relative;
                         .isActive {
                             .active {
@@ -185,6 +242,7 @@ header {
                             color: #736357;
                         }
                     }
+                    
                 }
                 .header_member {
                     display: none;

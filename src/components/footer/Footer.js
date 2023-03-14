@@ -19,17 +19,17 @@ const Footer = () => {
               {/* footer_icon */}
               <div className={styles.footer_icon}>
                 <div className={styles.icon_item} >
-                  <a>
+                  <a href="https://www.facebook.com/baokuolivingwaterswellnesscenter">
                     <AiFillFacebook style={{ fontSize: "50px", borderRadius: "15px", color: '#808080' }} />
                   </a>
                 </div>
                 <div className={styles.icon_item}>
-                  <a>
+                  <a href="https://www.facebook.com/baokuolivingwaterswellnesscenter">
                     <FaInstagramSquare style={{ fontSize: "50px", color: '#808080' }} />
                   </a>
                 </div>
                 <div className={styles.icon_item}>
-                  <a>
+                  <a href="https://page.line.me/psy0363x?openQrModal=true">
                     <FaLine style={{ fontSize: "50px", color: '#808080' }} />
                   </a>
                 </div>
