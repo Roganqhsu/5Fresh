@@ -10,11 +10,11 @@ const Tool = () => {
     }
     return (
         <div className={styles.header_tool}>
-            <div className={styles.header_tool_cart}>
+            {/* <div className={styles.header_tool_cart}>
                 <NavLink to="/login">
                     <AiOutlineShoppingCart style={{ fontSize: "30px" }} />
                 </NavLink>
-            </div>
+            </div> */}
 
             <div className={styles.header_tool_toTop} onClick={()=>{scrollTop()}}>
                 <BiArrowToTop style={{ fontSize: "30px" }} />

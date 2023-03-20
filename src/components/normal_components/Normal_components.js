@@ -16,9 +16,11 @@ export const Title =({english,chinese})=>{
 }
 
 export const MyButton =({text})=>{
+  const ok=()=>{
+  }
   return (
     <div className={styles.Button}>
-      <button>
+      <button onClick={()=>{ok()}}>
         {text}
       </button>
     </div>

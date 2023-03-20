@@ -1,6 +1,6 @@
 header {
     transition: 0.5s all;
-    z-index: 1;
+    z-index: 2;
     a {
         color: #000;
         text-decoration: none;
@@ -45,6 +45,7 @@ header {
             .header_list {
                 // border: #000 1px solid;
                 display: flex;
+                flex: end;
                 .header_item {
                     .header_item_none{
                         display: none;
@@ -205,9 +206,10 @@ header {
                 .header_list {
                     display: flex;
                     flex-direction: column;
-                    
+                    align-items: flex-end;
                     .header_item {
-                        // border: #000 1px solid;
+                        margin-top: 50px;
+                        border: #000 1px solid;
                         .header_item_none{
                             display: block;
                         }

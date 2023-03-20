@@ -37,12 +37,12 @@ const Checkout = () => {
     dispatch(CALCULATE_TOTAL_QUANTITY());
   }, [dispatch, cartItems]);
 
-  const description = `eShop payment: email: ${customerEmail}, Amount: ${totalAmount}`;
+  const description = `5Fresh payment: email: ${customerEmail}, Amount: ${totalAmount}`;
 
   useEffect(() => {
     // http://localhost:4242/create-payment-intent
     // Create PaymentIntent as soon as the page loads
-    fetch("https://eshop-react-firebase.herokuapp.com/create-payment-intent", {
+    fetch("http://localhost:4242/create-payment-intent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -61,6 +61,7 @@ const Checkout = () => {
       })
       .then((data) => {
         setClientSecret(data.clientSecret);
+        console.log(data.clientSecret);
       })
       .catch((error) => {
         setMessage("Failed to initialize checkout");
@@ -79,6 +80,7 @@ const Checkout = () => {
 
   return (
     <>
+      
       <section>
         <div className="container">{!clientSecret && <h3>{message}</h3>}</div>
       </section>

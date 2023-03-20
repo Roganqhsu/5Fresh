@@ -16,10 +16,10 @@ import styles from "./AddProduct.module.scss";
 import { selectProducts } from "../../../redux/slice/productSlice";
 
 const categories = [
-  { id: 1, name: "Laptop" },
-  { id: 2, name: "Electronics" },
-  { id: 3, name: "Fashion" },
-  { id: 4, name: "Phone" },
+  { id: 1, name: "生菜類" },
+  { id: 2, name: "根莖類" },
+  { id: 3, name: "葉菜類" },
+  { id: 4, name: "菇類" },
 ];
 
 const initialState = {
@@ -35,7 +35,7 @@ const AddProduct = () => {
   const { id } = useParams();
   const products = useSelector(selectProducts);
   const productEdit = products.find((item) => item.id === id);
-  console.log(productEdit);
+  // console.log(productEdit);
 
   const [product, setProduct] = useState(() => {
     const newState = detectForm(id, { ...initialState }, productEdit);
@@ -56,6 +56,8 @@ const AddProduct = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setProduct({ ...product, [name]: value });
+    console.log(product.category);
+
   };
 
   const handleImageChange = (e) => {
@@ -102,7 +104,6 @@ const AddProduct = () => {
       setIsLoading(false);
       setUploadProgress(0);
       setProduct({ ...initialState });
-
       toast.success("Product uploaded successfully.");
       navigate("/admin/all-products");
     } catch (error) {
@@ -110,7 +111,6 @@ const AddProduct = () => {
       toast.error(error.message);
     }
   };
-
   const editProduct = (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -119,7 +119,6 @@ const AddProduct = () => {
       const storageRef = ref(storage, productEdit.imageURL);
       deleteObject(storageRef);
     }
-
     try {
       setDoc(doc(db, "products", id), {
         name: product.name,
@@ -131,6 +130,7 @@ const AddProduct = () => {
         createdAt: productEdit.createdAt,
         editedAt: Timestamp.now().toDate(),
       });
+      
       setIsLoading(false);
       toast.success("Product Edited Successfully");
       navigate("/admin/all-products");
@@ -139,7 +139,6 @@ const AddProduct = () => {
       toast.error(error.message);
     }
   };
-
   return (
     <>
       {isLoading && <Loader />}

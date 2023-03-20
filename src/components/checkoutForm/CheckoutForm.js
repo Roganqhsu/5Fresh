@@ -70,9 +70,12 @@ const CheckoutForm = () => {
       addDoc(collection(db, "orders"), orderConfig);
       dispatch(CLEAR_CART());
       toast.success("Order saved");
+      console.log(orderConfig);
       navigate("/checkout-success");
+
     } catch (error) {
       toast.error(error.message);
+      console.log("error");
     }
   };
 
@@ -154,5 +157,6 @@ const CheckoutForm = () => {
     </section>
   );
 };
+
 
 export default CheckoutForm;

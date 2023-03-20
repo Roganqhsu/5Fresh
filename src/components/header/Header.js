@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   REMOVE_ACTIVE_USER,
   SET_ACTIVE_USER,
+  selectEmail
 } from "../../redux/slice/authSlice";
 import {
   CALCULATE_TOTAL_QUANTITY,
@@ -26,6 +27,7 @@ import { BsFillPersonFill } from "react-icons/bs";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { FaShoppingCart } from "react-icons/fa";
 import { BiArrowToTop, BiMenu } from "react-icons/bi";
+import { useSelect } from '@mui/base';
 const activeLink = ({ isActive }) => (isActive ? `${styles.isActive}` : `${styles.noActive}`)
 const Header = () => {
   // 本地端變數
@@ -35,6 +37,7 @@ const Header = () => {
   // 引入變數
   const navigate = useNavigate("/")
   // redux
+  const userEmail = useSelector(selectEmail)
   const dispatch = useDispatch();
   const ZoomNavBar = () => {
     if (window.scrollY > 80) {
@@ -53,10 +56,8 @@ const Header = () => {
 
   // 登入狀態改變
   useEffect(() => {
-
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log(user);
         if (user.displayName == null) {
           const u1 = user.email.slice(0, -10);
           const uName = u1.charAt(0).toUpperCase() + u1.slice(1);
@@ -64,7 +65,6 @@ const Header = () => {
         } else {
           setdisplayName(user.displayName);
         }
-
         dispatch(
           SET_ACTIVE_USER({
             email: user.email,
@@ -89,7 +89,6 @@ const Header = () => {
         console.log(error.message);
       });
   };
-
   return (
     <>
       <header className={scroll ? `${styles.scroll_header} ${styles.header}` : styles.header}>
@@ -161,17 +160,20 @@ const Header = () => {
                       <p>關於我</p>
                     </NavLink >
                   </div>
-                  <div className={styles.header_item}>
-                    {/* active */}
-                    <NavLink to="/admin" className={activeLink} >
-                      <AdminOnlyLink >
-                        <div className={styles.active}>
-                          <img src={Active} alt="active" />
-                        </div>
-                        <p>商品管理</p>
-                      </AdminOnlyLink>
-                    </NavLink>
-                  </div>
+                  {userEmail === "x10215989@gmail.com" ?
+                    <div className={styles.header_item}>
+                      {/* active */}
+                      <NavLink to="/admin" className={activeLink} >
+                        <AdminOnlyLink >
+                          <div className={styles.active}>
+                            <img src={Active} alt="active" />
+                          </div>
+                          <p>商品管理</p>
+                        </AdminOnlyLink>
+                      </NavLink>
+                    </div>
+                    : ""}
+
                   <div className={styles.header_item}>
                     {/* active */}
 
@@ -202,7 +204,7 @@ const Header = () => {
                     </ShowOnLogout>
                     <ShowOnLogin>
 
-                          <BsFillPersonFill style={{ fontSize: "30px", color: "#fff" }} />
+                      <BsFillPersonFill style={{ fontSize: "30px", color: "#fff" }} />
                       <NavLink to="/order-history">
                         <span>
                           HI  {displayName}
@@ -210,11 +212,11 @@ const Header = () => {
                         </span>
                       </NavLink>
                     </ShowOnLogin>
-                    <span style={{ color: 'white' }}>/&ensp;</span>
+
 
                     <ShowOnLogin>
                       <a onClick={() => logoutUser()}>
-                        <span>Logout</span>
+                        <span style={{ color: 'white' }}>/&ensp;</span><span>Logout</span>
                         {/* <p>登出</p> */}
                       </a>
 

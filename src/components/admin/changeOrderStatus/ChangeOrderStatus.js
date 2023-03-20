@@ -56,10 +56,10 @@ const ChangeOrderStatus = ({ order, id }) => {
                 <option value="" disabled>
                   -- Choose one --
                 </option>
-                <option value="Order Placed...">Order Placed...</option>
-                <option value="Processing...">Processing...</option>
-                <option value="Shipped...">Shipped...</option>
-                <option value="Delivered">Delivered</option>
+                <option value="等待店家接單">等待店家接單</option>
+                <option value="店家已出貨">店家已出貨</option>
+                <option value="已到貨">已到貨</option>
+                <option value="退貨處理中">退貨處理中</option>
               </select>
             </span>
             <span>
