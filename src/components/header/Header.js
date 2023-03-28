@@ -157,18 +157,18 @@ const Header = () => {
                       <div className={styles.active}>
                         <img src={Active} alt="active" />
                       </div>
-                      <p>關於我</p>
+                      <p>最新消息</p>
                     </NavLink >
                   </div>
                   {userEmail === "x10215989@gmail.com" ?
                     <div className={styles.header_item}>
                       {/* active */}
-                      <NavLink to="/admin" className={activeLink} >
+                      <NavLink to="/admin/all-products" className={activeLink} >
                         <AdminOnlyLink >
                           <div className={styles.active}>
                             <img src={Active} alt="active" />
                           </div>
-                          <p>商品管理</p>
+                          <p>業主管理</p>
                         </AdminOnlyLink>
                       </NavLink>
                     </div>

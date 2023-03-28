@@ -28,11 +28,16 @@
             font-size: 30px;
         }
         .home_news_item {
-                margin-right: 10px;
+            
+            margin-right: 10px;
             .home_news_img {
                 position: relative;
+                width: 285px;
+                height: 285px;
                 img {
                     width: 100%;
+                    height: 100%;
+                    
                     object-fit: cover;
                     border-radius: 3px;
                 }

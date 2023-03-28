@@ -4,32 +4,32 @@ import useFetchCollection from "../../customHooks/useFetchCollection";
 
 import {
   GET_PRICE_RANGE,
-  selectProducts,
-  STORE_PRODUCTS,
-} from "../../redux/slice/productSlice";
+  selectNews,
+  STORE_NEWS,
+} from "../../redux/slice/newsSlice";
 
 import styles from "./Product.module.scss";
-import ProductFilter from "./productFilter/ProductFilter";
+import ProductFilter from "../../components/product/productFilter/ProductFilter";
 import ProductList from "./productList/ProductList";
 import spinnerImg from "../../assets/spinner.jpg";
 import { FaCogs } from "react-icons/fa";
 
 const Product = () => {
-  const { data, isLoading } = useFetchCollection("products");
+  const { data, isLoading } = useFetchCollection("news");
   const [showFilter, setShowFilter] = useState(false);
-  const products = useSelector(selectProducts);
+  const products = useSelector(selectNews);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(
-      STORE_PRODUCTS({ 
-        products: data,
+      STORE_NEWS({
+        news: data,
       })
     );
 
     dispatch(
       GET_PRICE_RANGE({
-        products: data,
+        news: data,
       })
     );
   }, [dispatch, data]);
@@ -57,7 +57,10 @@ const Product = () => {
               className="--center-all"
             />
           ) : (
+            <>
+            123
             <ProductList products={products} />
+            </>
           )}
           <div className={styles.icon} onClick={toggleFilter}>
             <FaCogs size={20} color="orangered" />

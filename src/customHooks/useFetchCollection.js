@@ -6,7 +6,11 @@ import { db } from "../firebase/config";
 const useFetchCollection = (collectionName) => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    getCollection();
+  }, []);
   const getCollection = () => {
+    
     setIsLoading(true);
     try {
       const docRef = collection(db, collectionName);
@@ -20,6 +24,7 @@ const useFetchCollection = (collectionName) => {
         // console.log(allData);
         setData(allData);
         setIsLoading(false);
+        // console.log(allData);
       });
     } catch (error) {
       setIsLoading(false);
@@ -27,10 +32,8 @@ const useFetchCollection = (collectionName) => {
     }
   };
 
-  useEffect(() => {
-    getCollection();
-  }, []);
-
+ 
+console.log(data);
   return { data, isLoading };
 };
 

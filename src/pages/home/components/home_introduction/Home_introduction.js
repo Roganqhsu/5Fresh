@@ -16,9 +16,9 @@ const Home_introduction = () => {
           {/* text */}
           <div className={styles.home_introduction_text}>
             <div className={styles.home_introduction_text_content}><span>五鮮農產簡介，五鮮農產簡介，五鮮農產簡介，五鮮農產簡介，五鮮農產簡介，五鮮農產簡介，五鮮農產簡介，五鮮農產簡介，五鮮農產簡介，五鮮農產簡介，五鮮農產簡介，五鮮農產簡介，五鮮農產簡介，五鮮農產簡介，五鮮農產簡介，五鮮農產簡介，五鮮農產簡介，五鮮農產簡介，五鮮農產簡介，五鮮農產簡介，五鮮農產簡介，五鮮農產簡介，五鮮農產簡介，五鮮農產簡介，五鮮農產簡介，五鮮農產簡介，五鮮農產簡介，五鮮農產簡介，五鮮農產簡介，五鮮農產簡介，</span></div>
-            <div className={styles.introduce_button}>
-              < MyButton text="MORE" />
-            </div>
+            {/* <div className={styles.introduce_button}>
+              < MyButton text="MORE" className={styles.introduce_button_item}/>
+            </div> */}
           </div>
         </div>
         {/* img */}

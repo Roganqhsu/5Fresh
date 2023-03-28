@@ -10,9 +10,9 @@ import { deleteObject, ref } from "firebase/storage";
 import Notiflix from "notiflix";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  selectProducts,
-  STORE_PRODUCTS,
-} from "../../../redux/slice/productSlice";
+  selectNews,
+  STORE_NEWS,
+} from "../../../redux/slice/newsSlice";
 import useFetchCollection from "../../../customHooks/useFetchCollection";
 import {
   FILTER_BY_SEARCH,
@@ -21,35 +21,36 @@ import {
 import Search from "../../search/Search";
 import Pagination from "../../pagination/Pagination";
 
-const ViewProducts = () => {
+const ViewNews = () => {
   const [search, setSearch] = useState("");
   // 撈Firebase集合資料
-  const { data, isLoading } = useFetchCollection("products");
-  const products = useSelector(selectProducts);
-  const filteredProducts = useSelector(selectFilteredProducts);
+  const { data, isLoading } = useFetchCollection("news");
+  const news = useSelector(selectNews);
+  // const filteredProducts = useSelector(selectFilteredProducts);
+
   // Pagination states
-  const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage, setProductsPerPage] = useState(10);
+  // const [currentPage, setCurrentPage] = useState(1);
+  // const [productsPerPage, setProductsPerPage] = useState(10);
   // Get Current Products
-  const indexOfLastProduct = currentPage * productsPerPage;
-  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = filteredProducts.slice(
-    indexOfFirstProduct,
-    indexOfLastProduct
-  );
+  // const indexOfLastProduct = currentPage * productsPerPage;
+  // const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  // const currentProducts = filteredProducts.slice(
+  //   indexOfFirstProduct,
+  //   indexOfLastProduct
+  // );
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(
-      STORE_PRODUCTS({
-        products: data,
+      STORE_NEWS({
+        news: data,
       })
     );
   }, [dispatch, data]);
 
-  useEffect(() => {
-    dispatch(FILTER_BY_SEARCH({ products, search }));
-  }, [dispatch, products, search]);
+  // useEffect(() => {
+  //   dispatch(FILTER_BY_SEARCH({ news, search }));
+  // }, [dispatch, news, search]);
 
   const confirmDelete = (id, imageURL) => {
     Notiflix.Confirm.show(
@@ -75,13 +76,12 @@ const ViewProducts = () => {
 
   const deleteProduct = async (id, imageURL) => {
     try {
-      await deleteDoc(doc(db, "products", id));
+      await deleteDoc(doc(db, "news", id));
 
       const storageRef = ref(storage, imageURL);
       await deleteObject(storageRef);
-      toast.success("Product deleted successfully.");
     } catch (error) {
-      toast.error(error.message);
+      console.log(error.message);
     }
   };
 
@@ -93,12 +93,12 @@ const ViewProducts = () => {
 
         <div className={styles.search}>
           <p>
-            <b>{filteredProducts.length}</b> products found
+            <b>{news.length}</b> news found
           </p>
           <Search value={search} onChange={(e) => setSearch(e.target.value)} />
         </div>
 
-        {filteredProducts.length === 0 ? (
+        {news.length === 0 ? (
           <p>No product found.</p>
         ) : (
           <table>
@@ -113,8 +113,12 @@ const ViewProducts = () => {
               </tr>
             </thead>
             <tbody>
-              {currentProducts.map((product, index) => {
-                const { id, name, price, imageURL, category } = product;
+              {news.map((news, index) => {
+                const { id, name, actionDate,
+                actionTime,
+                endDAte,
+                endTime, imageURL, category } = news;
+                console.log(actionDate);
                 return (
                   <tr key={id}>
                     <td>{index + 1}</td>
@@ -127,9 +131,9 @@ const ViewProducts = () => {
                     </td>
                     <td>{name}</td>
                     <td>{category}</td>
-                    <td>{`$${price}`}</td>
+                    <td>{`$${actionDate}`}</td>
                     <td className={styles.icons}>
-                      <Link to={`/admin/add-product/${id}`}>
+                      <Link to={`/admin/add-news/${id}`}>
                         <FaEdit size={20} color="green" />
                       </Link>
                       &nbsp;
@@ -145,15 +149,15 @@ const ViewProducts = () => {
             </tbody>
           </table>
         )}
-        <Pagination
+        {/* <Pagination
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           productsPerPage={productsPerPage}
           totalProducts={filteredProducts.length}
-        />
+        /> */}
       </div>
     </>
   );
 };
 
-export default ViewProducts;
+export default ViewNews;

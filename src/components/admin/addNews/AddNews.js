@@ -12,14 +12,14 @@ import { toast } from "react-toastify";
 import { db, storage } from "../../../firebase/config";
 import Card from "../../card/Card";
 import Loader from "../../loader/Loader";
-import styles from "./AddProduct.module.scss";
-import { selectProducts } from "../../../redux/slice/productSlice";
+import styles from "./AddNews.module.scss";
+import { selectNews } from "../../../redux/slice/newsSlice";
 
 const categories = [
-  { id: 1, name: "生菜類" },
-  { id: 2, name: "根莖類" },
-  { id: 3, name: "葉菜類" },
-  { id: 4, name: "菇類" },
+  { id: 1, name: "公休公告" },
+  { id: 2, name: "檔期優惠" },
+  { id: 3, name: "推廣活動" },
+  { id: 4, name: "其他" },
 ];
 
 const initialState = {
@@ -27,19 +27,22 @@ const initialState = {
   imageURL: "",
   price: 0,
   category: "",
+  actionDate:"",
+  actionTime:"",
+  endDAte:"",
+  endTime:"",
   brand: "",
   desc: "",
 };
 
-const AddProduct = () => {
+const AddNews = () => {
   const { id } = useParams();
-  const products = useSelector(selectProducts);
-  // 用ID從所有product找出符合項目ID的項目 
-  const productEdit = products.find((item) => item.id === id);
-  // console.log(productEdit);
-// 重點
-  const [product, setProduct] = useState(() => {
-    // 依ID回傳目前狀態為編輯分頁或新增分頁
+  const sliceNews = useSelector(selectNews);
+  const productEdit = sliceNews.find((item) => item.id === id);
+
+  // const productEdit = news.find((item) => item.id === id);
+
+  const [news, setProduct] = useState(() => {
     const newState = detectForm(id, { ...initialState }, productEdit);
     return newState;
   });
@@ -57,35 +60,31 @@ const AddProduct = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setProduct({ ...product, [name]: value });
-    console.log(product.category);
+    setProduct({ ...news, [name]: value });
+    console.log(news);
 
   };
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     // console.log(file);
-    //                 ref(storage, "選擇資料夾"/"上傳名稱")
-    const storageRef = ref(storage, `5Fresh/${Date.now()}${file.name}`);
-    // 上傳照片
+
+    const storageRef = ref(storage, `5Fresh/news/${Date.now()}${file.name}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
+
     uploadTask.on(
       "state_changed",
       (snapshot) => {
-        //計算比率 
         const progress =
-        // 目前上傳量/總共需要上傳量=目前上傳進度百分比
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          // 將目前上傳比率傳入state
         setUploadProgress(progress);
       },
       (error) => {
         toast.error(error.message);
       },
       () => {
-        // 取得照片網址
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          setProduct({ ...product, imageURL: downloadURL });
+          setProduct({ ...news, imageURL: downloadURL });
           toast.success("Image uploaded successfully.");
         });
       }
@@ -94,24 +93,28 @@ const AddProduct = () => {
 
   const addProduct = (e) => {
     e.preventDefault();
-    // console.log(product);
+    // console.log(news);
     setIsLoading(true);
 
     try {
-      const docRef = addDoc(collection(db, "products"), {
-        name: product.name,
-        imageURL: product.imageURL,
-        price: Number(product.price),
-        category: product.category,
-        brand: product.brand,
-        desc: product.desc,
+      const docRef = addDoc(collection(db, "news"), {
+        name: news.name,
+        imageURL: news.imageURL,
+        // price: Number(news.price),
+        category: news.category,
+        brand: news.brand,
+        desc: news.desc,
+        actionDate:news.actionDate,
+        actionTime:news.actionTime,
+        endDAte:news.endDAte,
+        endTime:news.endTime,
         createdAt: Timestamp.now().toDate(),
       });
       setIsLoading(false);
       setUploadProgress(0);
       setProduct({ ...initialState });
       toast.success("Product uploaded successfully.");
-      navigate("/admin/all-products");
+      navigate("/admin/all-news");
     } catch (error) {
       setIsLoading(false);
       toast.error(error.message);
@@ -119,29 +122,30 @@ const AddProduct = () => {
   };
   const editProduct = (e) => {
     e.preventDefault();
-    setIsLoading(true); 
-      //若照片跟改 
-    if (product.imageURL !== productEdit.imageURL) {
-      //上傳新的照片 
+    setIsLoading(true);
+    // console.log(e);
+    if (news.imageURL !== productEdit.imageURL) {
       const storageRef = ref(storage, productEdit.imageURL);
-      // 將舊的刪除
       deleteObject(storageRef);
     }
     try {
-      setDoc(doc(db, "products", id), {
-        name: product.name,
-        imageURL: product.imageURL,
-        price: Number(product.price),
-        category: product.category,
-        brand: product.brand,
-        desc: product.desc,
+      setDoc(doc(db, "news", id), {
+        name: news.name,
+        imageURL: news.imageURL,
+        price: Number(news.price),
+        category: news.category,
+        brand: news.brand,
+        desc: news.desc,
+        actionDate:news.actionDate,
+        actionTime:news.actionTime,
+        endDAte:news.endDAte,
+        endTime:news.endTime,
         createdAt: productEdit.createdAt,
         editedAt: Timestamp.now().toDate(),
       });
-      
+      console.log("ok");
       setIsLoading(false);
-      toast.success("Product Edited Successfully");
-      navigate("/admin/all-products");
+      navigate("/admin/all-news");
     } catch (error) {
       setIsLoading(false);
       toast.error(error.message);
@@ -150,8 +154,8 @@ const AddProduct = () => {
   return (
     <>
       {isLoading && <Loader />}
-      <div className={styles.product}>
-        <h2>{detectForm(id, "Add New Product", "Edit Product")}</h2>
+      <div className={styles.news}>
+        <h2>{detectForm(id, "Add News", "Edit News")}</h2>
         <Card cardClass={styles.card}>
           <form onSubmit={detectForm(id, addProduct, editProduct)}>
             <label>Product name:</label>
@@ -160,7 +164,7 @@ const AddProduct = () => {
               placeholder="Product name"
               required
               name="name"
-              value={product.name}
+              value={news.name}
               onChange={(e) => handleInputChange(e)}
             />
 
@@ -187,36 +191,73 @@ const AddProduct = () => {
                 onChange={(e) => handleImageChange(e)}
               />
 
-              {product.imageURL === "" ? null : (
+              {news.imageURL === "" ? null : (
                 <input
                   type="text"
                   // required
                   placeholder="Image URL"
                   name="imageURL"
-                  value={product.imageURL}
+                  value={news.imageURL}
                   disabled
                 />
               )}
             </Card>
 
-            <label>Product price:</label>
+            <label>Date</label>
+            開始日期:
+            &emsp;
+
             <input
-              type="number"
-              placeholder="Product price"
-              required
-              name="price"
-              value={product.price}
+              type="date"
+              placeholder="Activity date"
+              // required
+              name="actionDate"
+              // value={}
               onChange={(e) => handleInputChange(e)}
             />
-            <label>Product Category:</label>
+            &emsp;
+
+            <input
+              type="time"
+              placeholder="Activity time"
+              // required
+              name="actionTime"
+              // value={}
+              onChange={(e) => handleInputChange(e)}
+            />
+            <br/>
+            ~
+            <br/>
+
+            結束日期:
+            &emsp;
+
+            <input
+              type="date"
+              placeholder="Activity Date/Time"
+              // required
+              name="endDate"
+              // value={}
+              onChange={(e) => handleInputChange(e)}
+            />
+            &emsp;
+            <input
+              type="time"
+              placeholder="Activity time"
+              // required
+              name="endTime"
+              // value={}
+              onChange={(e) => handleInputChange(e)}
+            />
+            <label>公告種類</label>
             <select
               required
               name="category"
-              value={product.category}
+              value={news.category}
               onChange={(e) => handleInputChange(e)}
             >
               <option value="" disabled>
-                -- choose product category --
+                -- choose news category --
               </option>
               {categories.map((cat) => {
                 return (
@@ -233,7 +274,7 @@ const AddProduct = () => {
               placeholder="Product brand"
               required
               name="brand"
-              value={product.brand}
+              value={news.brand}
               onChange={(e) => handleInputChange(e)}
             />
 
@@ -241,7 +282,7 @@ const AddProduct = () => {
             <textarea
               name="desc"
               required
-              value={product.desc}
+              value={news.desc}
               onChange={(e) => handleInputChange(e)}
               cols="30"
               rows="10"
@@ -257,4 +298,4 @@ const AddProduct = () => {
   );
 };
 
-export default AddProduct;
+export default AddNews;

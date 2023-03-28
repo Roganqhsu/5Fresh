@@ -3,7 +3,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
-console.log(process.env.REACT_APP_FB_API_KEY);
+// console.log(process.env.REACT_APP_FB_API_KEY);
 // Your web app's Firebase configuration
 export const firebaseConfig = {
     apiKey: "AIzaSyAV6HXnYc_k2X_zHERtSJbh3zPLeCU-JAw",

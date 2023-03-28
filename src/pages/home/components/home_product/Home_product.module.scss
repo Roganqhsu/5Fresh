@@ -5,11 +5,12 @@
         float: right;
     }
     .home_product_content_center {
+
         .home_product_content {
             align-items: center;
             margin: 75px auto 15px;
             display: flex;
-            justify-content: start;
+            justify-content: center;
             flex-direction: row;
             flex-wrap: wrap;
             .home_product_item {
@@ -20,6 +21,7 @@
                     position: relative;
                     width: 200px;
                     height: 200px;
+                    margin-bottom: 10px;
                     img {
                         position: absolute;
                         top: 50%;
@@ -64,6 +66,7 @@
                 }
                 // text
                 .home_product_left {
+                    
                     float: left;
                     color: #1f1816;
                     font-size: 14px;

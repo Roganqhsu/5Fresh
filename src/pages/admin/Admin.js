@@ -7,6 +7,9 @@ import OrderDetails from "../../components/admin/orderDetails/OrderDetails";
 import Orders from "../../components/admin/orders/Orders";
 import ViewProducts from "../../components/admin/viewProducts/ViewProducts";
 
+import AddNews from "../../components/admin/addNews/AddNews";
+import ViewNews from "../../components/admin/viewNews/ViewNews";
+
 import styles from "./Admin.module.scss";
 
 const Admin = () => {
@@ -22,6 +25,11 @@ const Admin = () => {
           <Route path="add-product/:id" element={<AddProduct />} />
           <Route path="orders" element={<Orders />} />
           <Route path="order-details/:id" element={<OrderDetails />} />
+          <Route path="add-product/:id" element={<AddProduct />} />
+          {/* News */}
+          <Route path="add-news/:id" element={<AddNews/>} />
+          <Route path="all-news" element={<ViewNews/>} />
+
         </Routes>
       </div>
     </div>

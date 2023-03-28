@@ -8,7 +8,7 @@ import {
   Home,
   Login, 
   Products, 
-  News, 
+  // News, 
   Register,
   Admin,
   Cart
@@ -25,8 +25,11 @@ import AdminOnlyRoute from "./components/adminOnlyRoute/AdminOnlyRoute"
 import CheckoutDetails from "./pages/checkout/CheckoutDetails";
 import Checkout from "./pages/checkout/Checkout";
 import CheckoutSuccess from "./pages/checkout/CheckoutSuccess";
+// news
+import NewsDetail from "./pages/news/productDetails/ProductDetails"
+import News from "./pages/news/Product";
 // styles
-import "slick-carousel/slick/slick"
+import "slick-carousel/slick/slick";
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
 function App() {
@@ -37,7 +40,9 @@ function App() {
         <Route path="/" element={<Home />} />
 
         <Route path="/products" element={<Products />} />
-        <Route path="/News" element={<Login />} />
+
+        <Route path="/News" element={<News />} />
+        <Route path="/News-details/:id" element={<NewsDetail />} />
 
         {/* auth */}
         <Route path="/login" element={<Login />} />
@@ -67,6 +72,7 @@ function App() {
           <Route path="/order-details/:id" element={<OrderDetails />} />
           <Route path="/review-product/:id" element={<ReviewProducts />} />
           {/* <Route path="*" element={<NotFound />} /> */}
+          <Route/>
       </Routes>
       <Tool />
       <Footer />

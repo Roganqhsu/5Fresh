@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./ProductList.module.scss";
 import { BsFillGridFill } from "react-icons/bs";
 import { FaListAlt } from "react-icons/fa";
-import Search from "../../search/Search";
+import Search from "../../../components/search/Search";
 import ProductItem from "../productItem/ProductItem";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -10,7 +10,7 @@ import {
   selectFilteredProducts,
   SORT_PRODUCTS,
 } from "../../../redux/slice/filterSlice";
-import Pagination from "../../pagination/Pagination";
+import Pagination from "../../../components/pagination/Pagination";
 
 const ProductList = ({ products }) => {
   const [grid, setGrid] = useState(true);
@@ -76,9 +76,10 @@ const ProductList = ({ products }) => {
           <p>No product found.</p>
         ) : (
           <>
-            {currentProducts.map((product) => {
+            {products.map((product) => {
               return (
                 <div key={product.id}>
+                  {/* 123 */}
                   <ProductItem {...product} grid={grid} product={product} />
                 </div>
               );
