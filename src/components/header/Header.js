@@ -19,11 +19,14 @@ import {
 } from "../../redux/slice/cartSlice";
 // link
 import { ShowOnLogin, ShowOnLogout } from "../hiddenLink/hiddenLink";
-import { AdminOnlyLink } from "../../components/adminOnlyRoute/AdminOnlyRoute"
+import { AdminOnlyLink } from "../../components/adminOnlyRoute/AdminOnlyRoute";
 // img
 import Active from "../../assets/index.png";
-import Logo from "../../assets/logo/1x/logo_bg_none.png"
-import { BsFillPersonFill } from "react-icons/bs";
+import Logo from "../../assets/logo/1x/logo_bg_none.png";
+// icon
+import { RxCross2 } from "react-icons/rx"
+import { ImCross } from "react-icons/im"
+import { BsFillPersonFill, BsShop } from "react-icons/bs";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { FaShoppingCart } from "react-icons/fa";
 import { BiArrowToTop, BiMenu } from "react-icons/bi";
@@ -103,12 +106,17 @@ const Header = () => {
               </div>
               {/* RWD_icon */}
               <div className={styles.header_RWD_item}>
-
                 <div className={styles.header_RWD_item_icon}>
-                  <NavLink to="/cart">
+                  <NavLink to="/admin/all-products">
+                    <BsShop style={{ fontSize: "30px" }} />
+                  </NavLink>
+                </div>
+                <div className={styles.header_RWD_item_icon}>
+                  <NavLink to="/order-history">
                     <BsFillPersonFill style={{ fontSize: "30px" }} />
                   </NavLink>
                 </div>
+
                 <div className={styles.header_RWD_item_icon}>
                   <NavLink to="/cart">
 
@@ -121,7 +129,12 @@ const Header = () => {
                   </NavLink>
                 </div>&ensp;
                 <div className={styles.header_RWD_item_icon} onClick={() => { hideMenu() }}>
-                  <BiMenu style={{ fontSize: "30px" }} />
+                  {menu ?
+                    <RxCross2 style={{ fontSize: "30px" }} />
+                    :
+                    <BiMenu style={{ fontSize: "30px" }} />
+                  }
+
                 </div>
               </div>
             </div>
@@ -130,7 +143,7 @@ const Header = () => {
             <nav className={scroll ? `${styles.scroll_nav}` : ""}>
               <div className={menu ? `${styles.header_content} ${styles.header_show_content}` : `${styles.header_content}`} onClick={() => { hideMenu() }}>
                 {/* mask */}
-                <div className={styles.header_mask} onClick={() => { hideMenu() }}></div>
+                {/* <div className={styles.header_mask} onClick={() => { hideMenu() }}></div> */}
                 {/* header_list */}
                 <div className={styles.header_list}>
                   <div className={styles.header_item}>
@@ -159,20 +172,18 @@ const Header = () => {
                       </div>
                       <p>最新消息</p>
                     </NavLink >
+                    {/* about me */}
                   </div>
-                  {userEmail === "x10215989@gmail.com" ?
-                    <div className={styles.header_item}>
-                      {/* active */}
-                      <NavLink to="/admin/all-products" className={activeLink} >
-                        <AdminOnlyLink >
-                          <div className={styles.active}>
-                            <img src={Active} alt="active" />
-                          </div>
-                          <p>業主管理</p>
-                        </AdminOnlyLink>
-                      </NavLink>
-                    </div>
-                    : ""}
+                  <div className={styles.header_item}>
+
+                    <NavLink to="/about" className={activeLink}>
+                      <div className={styles.active}>
+                        <img src={Active} alt="active" />
+                      </div>
+                      <p>關於我</p>
+                    </NavLink>
+                  </div>
+
 
                   <div className={styles.header_item}>
                     {/* active */}
@@ -188,53 +199,114 @@ const Header = () => {
 
                     </ShowOnLogin>
 
-
+                    
                     {/* 
                       
                      */}
                   </div>
+                  <div className={styles.header_item}>
+
+                      <NavLink to="/test" className={activeLink}>
+                        <div className={styles.active}>
+                          <img src={Active} alt="active" />
+                        </div>
+                        <p>測試用</p>
+                      </NavLink>
+                    </div>
                 </div>
                 {/* header_member */}
                 <div className={styles.header_member}>
+                  {/* manger */}
+                  {userEmail === "x10215989@gmail.com" ?
+                    <div className={styles.header_shop}>
+                      {/* active */}
+                      <NavLink to="/admin/all-products"  >
+                        <BsShop className={styles.header_shop_icon} style={{
+                          fontSize: "30px",
+                          //  color: "#fff"
+                        }} /> &ensp;
+
+                        <AdminOnlyLink >
+                          <span >商家管理</span>
+                        </AdminOnlyLink>
+                      </NavLink>
+                    </div>
+                    : ""}
                   {/* member */}
                   <div className={styles.header_member_item}>
-                    <ShowOnLogout>
-                      <BsFillPersonFill style={{ fontSize: "30px", color: "#fff" }} />
-                      <NavLink to="/login"><span>Login</span></NavLink>
-                    </ShowOnLogout>
-                    <ShowOnLogin>
+                    <div className={styles.header_member_item_login}>
 
-                      <BsFillPersonFill style={{ fontSize: "30px", color: "#fff" }} />
-                      <NavLink to="/order-history">
-                        <span>
-                          HI  {displayName}
-                          &ensp;
-                        </span>
-                      </NavLink>
-                    </ShowOnLogin>
+                      <ShowOnLogout>
+                        <BsFillPersonFill
+                          className={styles.header_member_item_icon}
+                          style={{ fontSize: "30px" }}
+                        />
+                        <NavLink to="/login"><span
+                          className={styles.header_member_item_text}
+                        >Login</span>
+                        </NavLink>
+                      </ShowOnLogout>
+                    </div>
+                    <div className={styles.header_member_item_person}>
+
+                      <ShowOnLogin>
+
+                        <BsFillPersonFill
+                          className={styles.header_member_item_icon}
+
+                          style={{
+                            fontSize: "30px",
+                            // color: "#fff"
+                          }} />
+                        <NavLink to="/order-history">
+                          <span
+                            className={styles.header_member_item_text}
+
+                          >
+                            HI  {displayName}
+                            &ensp;
+                          </span>
+                        </NavLink>
+                      </ShowOnLogin>
+                    </div>
+
+                    <div className={
+                      styles.header_member_item_logout
+                    }>
 
 
-                    <ShowOnLogin>
-                      <a onClick={() => logoutUser()}>
-                        <span style={{ color: 'white' }}>/&ensp;</span><span>Logout</span>
-                        {/* <p>登出</p> */}
-                      </a>
+                      <ShowOnLogin>
+                        <a onClick={() => logoutUser()}>
+                          <span style={{ color: 'white' }}>/&ensp;</span>
 
-                    </ShowOnLogin>
+                          <span>Logout</span>
+                          {/* <p>登出</p> */}
+                        </a>
 
+                      </ShowOnLogin>
+
+                    </div>
 
                   </div>
                   {/* cart */}
                   <div className={styles.header_cart}>
                     <NavLink to="/cart">
-                      <AiOutlineShoppingCart style={{ fontSize: "30px", color: "#fff" }} />
+                      <AiOutlineShoppingCart
+                        className={styles.header_cart_icon}
+                        style={{
+                          fontSize: "30px",
+                        }} />
                       <span className={styles.header_cart_cartTotalQuantity}>
                         {cartTotalQuantity}
                       </span>
                       &emsp;
-                      <span className={styles.header_cart_text}>Cart</span>
+                      <span className={styles.header_cart_text}>購物清單</span>
                     </NavLink>
                   </div>
+                </div>
+
+                <div className={styles.header_mask} onClick={() => { hideMenu() }}>
+
                 </div>
               </div>
             </nav>

@@ -2,7 +2,9 @@
     margin-top: 120px;
 
     .home_product_title {
-        float: right;
+        // float: ;
+        display: flex;
+        justify-content: center;
     }
     .home_product_content_center {
 

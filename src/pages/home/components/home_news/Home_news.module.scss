@@ -1,7 +1,9 @@
 .home_news {
     margin-top: 120px;
     .home_news_title {
-        float: right;
+        // float: right;
+        display: flex;
+        justify-content: center;
     }
     .clear {
         clear: both;

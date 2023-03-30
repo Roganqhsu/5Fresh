@@ -38,12 +38,12 @@ const initialState = {
 const AddNews = () => {
   const { id } = useParams();
   const sliceNews = useSelector(selectNews);
-  const productEdit = sliceNews.find((item) => item.id === id);
+  const newsEdit = sliceNews.find((item) => item.id === id);
+console.log(newsEdit);
+  // const newsEdit = news.find((item) => item.id === id);
 
-  // const productEdit = news.find((item) => item.id === id);
-
-  const [news, setProduct] = useState(() => {
-    const newState = detectForm(id, { ...initialState }, productEdit);
+  const [news, setNews] = useState(() => {
+    const newState = detectForm(id, { ...initialState }, newsEdit);
     return newState;
   });
 
@@ -60,7 +60,7 @@ const AddNews = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setProduct({ ...news, [name]: value });
+    setNews({ ...news, [name]: value });
     console.log(news);
 
   };
@@ -84,14 +84,14 @@ const AddNews = () => {
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          setProduct({ ...news, imageURL: downloadURL });
+          setNews({ ...news, imageURL: downloadURL });
           toast.success("Image uploaded successfully.");
         });
       }
     );
   };
 
-  const addProduct = (e) => {
+  const addNews = (e) => {
     e.preventDefault();
     // console.log(news);
     setIsLoading(true);
@@ -112,7 +112,7 @@ const AddNews = () => {
       });
       setIsLoading(false);
       setUploadProgress(0);
-      setProduct({ ...initialState });
+      setNews({ ...initialState });
       toast.success("Product uploaded successfully.");
       navigate("/admin/all-news");
     } catch (error) {
@@ -120,12 +120,12 @@ const AddNews = () => {
       toast.error(error.message);
     }
   };
-  const editProduct = (e) => {
+  const editNews = (e) => {
     e.preventDefault();
     setIsLoading(true);
     // console.log(e);
-    if (news.imageURL !== productEdit.imageURL) {
-      const storageRef = ref(storage, productEdit.imageURL);
+    if (news.imageURL !== newsEdit.imageURL) {
+      const storageRef = ref(storage, newsEdit.imageURL);
       deleteObject(storageRef);
     }
     try {
@@ -140,7 +140,7 @@ const AddNews = () => {
         actionTime:news.actionTime,
         endDAte:news.endDAte,
         endTime:news.endTime,
-        createdAt: productEdit.createdAt,
+        createdAt: newsEdit.createdAt,
         editedAt: Timestamp.now().toDate(),
       });
       console.log("ok");
@@ -157,7 +157,7 @@ const AddNews = () => {
       <div className={styles.news}>
         <h2>{detectForm(id, "Add News", "Edit News")}</h2>
         <Card cardClass={styles.card}>
-          <form onSubmit={detectForm(id, addProduct, editProduct)}>
+          <form onSubmit={detectForm(id, addNews, editNews)}>
             <label>Product name:</label>
             <input
               type="text"

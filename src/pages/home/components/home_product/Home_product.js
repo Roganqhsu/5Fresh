@@ -19,7 +19,7 @@ const Home_product = () => {
         <div className={`container ${styles.home_product} `}>
             {/* title */}
             <div className={styles.home_product_title}>
-                <Title english="Shopping" chinese="熱門商品" />
+                <Title english="Shop" chinese="熱門商品" />
             </div>
             <div className={styles.clear}></div>
             {/* home_product_content */}

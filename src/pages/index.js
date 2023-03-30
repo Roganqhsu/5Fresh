@@ -10,4 +10,6 @@ export {default as Products} from "./products/Products";
 export {default as News} from "./news/News"; 
 
 // cart
-export {default as Cart} from "./cart/Cart"
+export {default as Cart} from "./cart/Cart";
+// test 
+export {default as Test} from "./test/Test";

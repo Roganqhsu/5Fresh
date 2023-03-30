@@ -1,39 +1,44 @@
+.home_introduction_title{
+    margin-top: 90px;
+    display: flex;
+    justify-content: center;
+}
 .home_introduction {
+    margin-top: 90px;
     // height: 1000px;
-    margin-top: 100px;
     display: flex;
     justify-content: center;
     .home_introduction_content {
         width: 49%;
         display: flex;
         margin-right: 15px;
+
         .home_introduction_logo {
             // width: 00px;
             margin-right: 10px;
-            margin-top: 50px;
-            img{
-                width: 70px;
+            // margin-top: 50px;
+            img {
+                // width: 100%;
+                // width: 100px;
+                object-fit: contain;
             }
         }
         .home_introduction_text {
             width: auto;
             .home_introduction_text_content {
-                // width: ;
-                // height: 50%;
                 margin: 70px 10px;
-                overflow:auto;
-                // display: "-webkit-box";
-                display: -webkit-box;
-
-                -webkit-box-orient: vertical;
-                white-space: normal;
-                -webkit-line-clamp: 7;
-                // -webkit-box-orient: vertical;  
-
+                p {
+                    font-size: 30px;
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 4;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
             }
-            .introduce_button{
-                margin-right: 20px;
-                float: right;
+            .introduce_button {
+                margin-left: 30px;
+                float: left;
                 // margin: 0 auto;
                 // display: flex;
                 // justify-content: center;
@@ -44,21 +49,21 @@
         width: 40%;
         display: flex;
         align-items: center;
-        img{
+        img {
             border-radius: 4px;
             width: 100%;
         }
     }
 }
 @media screen and(max-width:768px) {
-    .home_introduction{
+    .home_introduction {
         display: flex;
         flex-direction: column;
         align-items: center;
-        .home_introduction_content{
+        .home_introduction_content {
             width: 90%;
         }
-        .home_introduction_img{
+        .home_introduction_img {
             margin-top: 50px;
             width: 90%;
         }
