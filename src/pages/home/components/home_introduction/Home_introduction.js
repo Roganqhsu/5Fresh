@@ -8,7 +8,7 @@ const Home_introduction = () => {
   return (
     <div className="container">
       <div className={styles.home_introduction_title}>
-        <Title className={styles.home_introduction_title} english={"About"} chinese={"品牌故事"} />
+        <Title id="home_introduction_title" className={styles.home_introduction_title} english={"About"} chinese={"品牌故事"} />
       </div>
       <div className={styles.home_introduction}>
         {/* content */}

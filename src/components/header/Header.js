@@ -154,6 +154,17 @@ const Header = () => {
                       </div>
                       <p>首頁</p>
                     </NavLink>
+                    <div className={styles.header_item_list}>
+                      <a href="#home_introduction_title" className={styles.header_item_list_object}>
+                        品牌故事
+                      </a>
+                      <div className={styles.header_item_list_object}>
+                        熱門商品
+                      </div>
+                      <div className={styles.header_item_list_object}>
+                        最新消息
+                      </div>
+                    </div>
                   </div>
                   <div className={styles.header_item}>
                     {/* active */}
@@ -175,13 +186,23 @@ const Header = () => {
                     {/* about me */}
                   </div>
                   <div className={styles.header_item}>
-
+                    
                     <NavLink to="/about" className={activeLink}>
                       <div className={styles.active}>
                         <img src={Active} alt="active" />
                       </div>
                       <p>關於我</p>
                     </NavLink>
+                    <div className={styles.header_item_list}>
+                      <div className={styles.header_item_list_object}>
+                        <span>
+                        重大歷程
+                        </span>
+                      </div>
+                      <div className={styles.header_item_list_object}>
+                        創辦理念
+                      </div>
+                    </div>
                   </div>
 
 
@@ -199,20 +220,20 @@ const Header = () => {
 
                     </ShowOnLogin>
 
-                    
+
                     {/* 
                       
                      */}
                   </div>
                   <div className={styles.header_item}>
 
-                      <NavLink to="/test" className={activeLink}>
-                        <div className={styles.active}>
-                          <img src={Active} alt="active" />
-                        </div>
-                        <p>測試用</p>
-                      </NavLink>
-                    </div>
+                    <NavLink to="/test" className={activeLink}>
+                      <div className={styles.active}>
+                        <img src={Active} alt="active" />
+                      </div>
+                      <p>測試用</p>
+                    </NavLink>
+                  </div>
                 </div>
                 {/* header_member */}
                 <div className={styles.header_member}>
